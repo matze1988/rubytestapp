@@ -1,0 +1,22 @@
+           <% provide(:title, 'Home') %>
+           <%= link_to "Neuen Eintrag hinzufügen", addentry_path, class: "btn btn-success" %>
+          	<hr>
+           
+           <% if not @gbentries.any? %>
+           <div class="alert">
+            	Es sind noch keine Einträge vorhanden.
+            </div>
+           <% end %>
+           
+           <% @gbentries.each do |entry| %> 
+            <div class="gbentries">
+                <div class="entry">
+                	<div class="header"> Verfasst von <a href="mailto:<%= entry.email %>"><%= entry.name %></a> am <%= entry.created_at.strftime('%d.%m.%Y %H:%M') %>
+                        <!-- <div class="number">#1</div>-->
+                    </div>
+                    <div class="text">
+                    <%= entry.message %>
+                    </div>
+                </div>
+          	</div>
+          	<% end %>

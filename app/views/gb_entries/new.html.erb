@@ -1,0 +1,51 @@
+<% provide(:title, 'Neuen GB Eintrag') %>
+<%= link_to "Zurück", root_path, class: "btn" %>
+
+<!-- <a class="btn" href=""><i class="icon-arrow-left icon-black"></i> Zurück</a>-->
+          	<hr>
+          	
+            <% if @gbentry.errors.any? %>
+              <div id="error_explanation">
+                <div class="alert alert-error">
+                  The form contains <%= pluralize(@gbentry.errors.count, "error") %>.
+                </div>
+                <ul>
+                <% @gbentry.errors.full_messages.each do |msg| %>
+                  <li>* <%= msg %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+          	
+          	<%= form_for(@gbentry, :html => { :class => "form-horizontal"}) do |f| %>
+                <fieldset>
+                <legend>Neuen Eintrag hinzufügen</legend>
+                    <div class="control-group">
+                        <%= f.label :name, :class => "control-label" %>
+                        <div class="controls">
+                            <%= f.text_field :name, :class => "input-xlarge" %>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <%= f.label :email, :class => "control-label" %>
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on">@</span><%= f.text_field :email, :class => "span" %>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <%= f.label :message, :class => "control-label" %>
+                        <div class="controls">
+                            <%= f.text_area :message, :class => "span6", :rows => 5 %>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <%= f.submit "Eintrag speichern", class: "btn btn-primary" %>
+                        <%= link_to "Abbrechen", root_path, class: "btn" %>
+                    </div>
+                </fieldset>
+            <% end %>
